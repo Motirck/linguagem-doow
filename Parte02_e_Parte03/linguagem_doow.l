@@ -54,6 +54,7 @@ valor [0-9]+
 "false" 				{ return tFalse; }
 "import" 				{ return tImport; }
 "="						{ return Tigual; }
+"==="					{ return TigualTriplo; }
 ","						{ return Tvirgula; }
 "%"						{ return Tporcentagem; }
 "<" 					{ return Tmenor; }
@@ -71,6 +72,13 @@ valor [0-9]+
 "resolve" 				{ return Tresolve; }
 "reject" 				{ return Treject;}
 "function" 				{ return Tfunction;}
+"using" 				{ return Tusing;}
+"var" 					{ return Tvariavel;}
+"?" 					{ return TInterrogacao;}
+"&&" 					{ return TComparacaoE;}
+"||" 					{ return TComparacaoOU;}
+"#" 					{ return THashtagComentario;}
+"$" 					{ return TSifrao;}
 {var} 					{ return Tvar; }
 {valor} 				{ return Tvalor; }
 [ \n\t] 
