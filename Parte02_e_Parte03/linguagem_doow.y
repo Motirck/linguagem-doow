@@ -84,6 +84,21 @@
 
 inicio: prog;
 
+declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho |
+                   TaddLibs Tvar caminho;
+caminho: tFrom Taspas Tvar Taspas;
+
+replace: Treplace tabreParenteses Taspas palavrasOuNumeros 
+         Taspas Tvirgula Taspas palavrasOuNumeros Taspas TfechaParenteses;
+
+palavrasOuNumeros: Tvar | Tvalor;
+
+console: Tlog log;
+
+log: tabreParenteses chamada TfechaParenteses TpontoVirgula;
+
+chamada:  Taspas palavrasOuNumeros Taspas tVirgula chamada | Taspas palavrasOuNumeros Taspas | ;
+
 
 %%
 
