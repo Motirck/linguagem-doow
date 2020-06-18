@@ -60,6 +60,7 @@ valor [0-9]+
 "<" 					{ return Tmenor; }
 ">" 					{ return Tmaior; }
 "-"						{ return Tmenos; }
+":"						{ return TdoisPontos; }
 "+"						{ return Tmais; }
 "*"						{ return Tvezes; }
 "/"						{ return Tdivisao; }

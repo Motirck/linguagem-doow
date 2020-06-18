@@ -88,16 +88,73 @@ declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho |
                    TaddLibs Tvar caminho;
 caminho: tFrom Taspas Tvar Taspas;
 
-replace: Treplace tabreParenteses Taspas palavrasOuNumeros 
+replace: Treplace TabreParenteses Taspas palavrasOuNumeros 
          Taspas Tvirgula Taspas palavrasOuNumeros Taspas TfechaParenteses;
 
 palavrasOuNumeros: Tvar | Tvalor;
 
 console: Tlog log;
 
-log: tabreParenteses chamada TfechaParenteses TpontoVirgula;
+log: TabreParenteses chamada TfechaParenteses TpontoVirgula;
 
-chamada:  Taspas palavrasOuNumeros Taspas tVirgula chamada | Taspas palavrasOuNumeros Taspas | ;
+chamada:  Taspas palavrasOuNumeros Taspas Tvirgula chamada | Taspas palavrasOuNumeros Taspas | ;
+
+ifTern: TifTern TabreParenteses Tvar Tvirgula Tvar Tvirgula Tvar TpontoVirgula;
+
+inArray: TinArray TabreParenteses Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula ;
+
+indexOf: Tponto TindexOf TabreParenteses Taspas palavrasOuNumeros Taspas TpontoVirgula;
+
+isNullEmptyUndefined: TisNullEmptyUndefined TabreParenteses Tvar TfechaParenteses TpontoVirgula ;
+
+tryCatch: Ttry TabreChaves console TfechaChaves Tcatch tabreChaves console TfechaChaves ;
+
+promise: Tnew Tpromise TabreParenteses Tresolve Tvirgula Treject TfechaParenteses;
+
+convertePontoVirgula: TconvertePontoVirgula TabreParenteses Tvar TfechaParenteses TpontoVirgula;
+
+forEach: Tvar Tponto TforEach TabreParenteses Tvar TmaiorIgual corpoForEach TfechaParenteses TpontoVirgula;
+
+corpoForEach: ;
+
+map: Tvar Tponto Tmap TabreParenteses Tfunction TabreParenteses Tvar TfechaParenteses TabreChaves corpoMap TfechaChaves TfechaParenteses TpontoVirgula;
+
+corpoMap: ;
+
+length: Tponto Tlength ;
+
+reduce: Tponto Treduce TabreParenteses Tvar tfechaParenteses TpontoVirgula;
+
+enum: Tenum Tvar TabreChaves corpoEnum;
+
+corpoEnum: Tvar Tvirgula corpoEnum | Tvar Tvirgula TfechaChaves;
+
+return: Treturn corpoCodigo;
+
+corpoCodigo: ;
+
+tiposDeVariavel: var | const;
+
+declaraVariavel: tiposDeVariavel tVar inicializaVarivel TpontoVirgula | tiposDeVariavel tvar TpontoVirgula;
+
+inicializaVarivel: Tigual stringOuNumero;
+
+stringOuNumero: Taspas Tvar Taspas | Tvalor;
+
+switch: Tswitch tabreParenteses tVar tfechaParenteses TabreChaves corpoSwitch;
+
+corpoSwitch:  Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula corpoSwitch | Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula;
+
+corpoCase: ;
+
+condicoes: TmaiorIgual | Tmaior | Tmenor | Tmenor Tigual;
+
+while: Twhile tabreParenteses palavrasOuNumeros condicoes palavrasOuNumeros TfechaParenteses TabreChaves corpowhile TfechaChaves;
+
+corpoWhile: ;
+
+TiposDeFuncao: void | int | char;
+
 
 
 %%
