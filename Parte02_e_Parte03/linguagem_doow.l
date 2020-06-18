@@ -82,6 +82,7 @@ valor [0-9]+
 "$" 					{ return TSifrao;}
 {var} 					{ return Tvar; }
 {valor} 				{ return Tvalor; }
+["][^"]*["]				{ return Tstring; }
 [ \n\t] 
 
 %%

@@ -69,6 +69,8 @@
 %token Tresolve
 %token Treject
 %token Tfunction
+%token TdoisPontos
+%token Tstring
 %token Tusing
 %token Tvariavel
 %token TInterrogacao
@@ -115,11 +117,11 @@ convertePontoVirgula: TconvertePontoVirgula TabreParenteses Tvar TfechaParentese
 
 forEach: Tvar Tponto TforEach TabreParenteses Tvar TmaiorIgual corpoForEach TfechaParenteses TpontoVirgula;
 
-corpoForEach: ;
+corpoForEach: corpoGeral;
 
 map: Tvar Tponto Tmap TabreParenteses Tfunction TabreParenteses Tvar TfechaParenteses TabreChaves corpoMap TfechaChaves TfechaParenteses TpontoVirgula;
 
-corpoMap: ;
+corpoMap: corpoGeral;
 
 length: Tponto Tlength ;
 
@@ -131,7 +133,7 @@ corpoEnum: Tvar Tvirgula corpoEnum | Tvar Tvirgula TfechaChaves;
 
 return: Treturn corpoCodigo;
 
-corpoCodigo: ;
+corpoCodigo: corpoGeral;
 
 tiposDeVariavel: var | const;
 
@@ -145,15 +147,39 @@ switch: Tswitch tabreParenteses tVar tfechaParenteses TabreChaves corpoSwitch;
 
 corpoSwitch:  Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula corpoSwitch | Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula;
 
-corpoCase: ;
+corpoCase: corpoGeral;
 
 condicoes: TmaiorIgual | Tmaior | Tmenor | Tmenor Tigual;
 
 while: Twhile tabreParenteses palavrasOuNumeros condicoes palavrasOuNumeros TfechaParenteses TabreChaves corpowhile TfechaChaves;
 
-corpoWhile: ;
+corpoWhile: corpoGeral;
 
-TiposDeFuncao: void | int | char;
+TiposDeFuncao: void | int | char;s
+
+corpoGeral: 
+   console
+   | chamada
+   | ifTern
+   | inArray
+   | indexOf
+   | isNullEmptyUndefined
+   | tryCatch
+   | promise
+   | convertePontoVirgula
+   | forEach
+   | map
+   | length
+   | reduce
+   | enum
+   | declaraVariavel
+   | inicializaVarivel
+   | switch
+   | condicoes
+   | while corpoGeral
+   | continuacaoCodigo;  
+
+continuacaoCodigo: 
 
 
 
