@@ -88,7 +88,7 @@ inicio: prog;
 
 declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho |
                    TaddLibs Tvar caminho;
-caminho: Trom Taspas Tvar Taspas;
+caminho: Tfrom Taspas Tvar Taspas;
 
 replace: Treplace TabreParenteses Taspas palavrasOuNumeros 
          Taspas Tvirgula Taspas palavrasOuNumeros Taspas TfechaParenteses;
