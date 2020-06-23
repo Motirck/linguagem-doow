@@ -88,7 +88,7 @@ inicio: prog;
 
 declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho |
                    TaddLibs Tvar caminho;
-caminho: tFrom Taspas Tvar Taspas;
+caminho: Trom Taspas Tvar Taspas;
 
 replace: Treplace TabreParenteses Taspas palavrasOuNumeros 
          Taspas Tvirgula Taspas palavrasOuNumeros Taspas TfechaParenteses;
@@ -155,7 +155,7 @@ while: Twhile tabreParenteses palavrasOuNumeros condicoes palavrasOuNumeros Tfec
 
 corpoWhile: corpoGeral;
 
-TiposDeFuncao: void | int | char;s
+TiposDeFuncao: void | int | char;
 
 corpoGeral: 
    console
