@@ -13,6 +13,7 @@
 %token Ttry
 %token Tcatch
 %token TaddLibs
+%token TigualDuplo
 %token Treplace
 %token Tasync
 %token Tawait
@@ -47,9 +48,9 @@
 %token TfechaChaves
 %token TabreColchete
 %token TfechaColchete
-%token tTrue
-%token tFalse
-%token tImport
+%token Ttrue
+%token Tfalse
+%token Timport
 %token Tigual
 %token TigualTriplo
 %token Tvirgula
@@ -79,41 +80,64 @@
 %token THashtagComentario
 %token TSifrao
 %token Tvar
+%token Tclass
 %token Tvalor
 %start inicio
 
 %%
 
 inicio: prog;
+prog: declaraBiblioteca prog | declaraBiblioteca2Tipo prog | comecaComponent;
 
-declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho |
-                   TaddLibs Tvar caminho;
-caminho: Tfrom Taspas Tvar Taspas;
+declaraBiblioteca: TaddLibs TabreChaves Tvar TfechaChaves caminho TpontoVirgula | TaddLibs Tvar caminho TpontoVirgula;
+declaraBiblioteca2Tipo: TSifrao Tusing Tvar TpontoVirgula;
+caminho: Tfrom Tstring;
+comecaComponent: Tclass Tvar TabreChaves declaracaoVariaveis;
+declaracaoVariaveis: variaveis declaracaoVariaveis | realizarReplace;
+variaveis:  Tvariavel VAR TpontoVirgula | constante TpontoVirgula;
+VAR: Tvar | Tvar Tigual palavrasOuNumeros | Tvar TabreColchete Tvar TfechaColchete | Tvar TabreColchete Tvalor TfechaColchete | Tvar Tvirgula VAR;
+palavrasOuNumeros: Tvar | Tvalor | Tstring;
+constante: TSifrao Tconst Tvar Tigual palavrasOuNumeros | TSifrao Tconst Tvar;
 
-replace: Treplace TabreParenteses Taspas palavrasOuNumeros 
-         Taspas Tvirgula Taspas palavrasOuNumeros Taspas TfechaParenteses;
 
-palavrasOuNumeros: Tvar | Tvalor;
+realizarReplace: Tvar replace realizarReplace | chamadaFuncao;
+replace: TabreParenteses Tstring Tvirgula Tstring TfechaParenteses TpontoVirgula;
+chamadaFuncao: convertePontoVirgula chamadaFuncao |
+               isNullEmptyUndefined chamadaFuncao | 
+               ifTern chamadaFuncao               | 
+               inArray chamadaFuncao              |
+               indexOf chamadaFuncao              |
+               tryCatch chamadaFuncao             |
+               condicao chamadaFuncao             |
+               qualquerFuncao chamadaFuncao       |
+               fechaChaves;
+convertePontoVirgula: TconvertePontoVirgula TabreParenteses Tvar TfechaParenteses TpontoVirgula;
+isNullEmptyUndefined: TisNullEmptyUndefined TabreParenteses Tvar TfechaParenteses TpontoVirgula ;
+tryCatch: Ttry TabreChaves console Tcatch TabreChaves console | Ttry TabreChaves chamadaFuncao Tcatch TabreChaves chamadaFuncao |
+          Ttry TabreChaves console Tcatch TabreChaves chamadaFuncao | Ttry TabreChaves chamadaFuncao Tcatch TabreChaves console;
+ifTern: TifTern TabreParenteses Tvar Tvirgula Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula;
+inArray: TinArray TabreParenteses Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula ;
+indexOf: Tvar TindexOf TabreParenteses Tstring TfechaParenteses TpontoVirgula;
+condicao: Tif TabreParenteses Tvar TigualDuplo palavrasOuNumeros TfechaParenteses TabreChaves Treturn Ttrue TpontoVirgula TfechaChaves Telse TabreChaves Treturn Tfalse TpontoVirgula TfechaChaves;
+
 
 console: Tlog log;
-
 log: TabreParenteses chamada TfechaParenteses TpontoVirgula;
+chamada:  Tstring Tvirgula chamada | Tstring;
+qualquerFuncao: Tvar TabreParenteses TfechaParenteses TpontoVirgula;
 
-chamada:  Taspas palavrasOuNumeros Taspas Tvirgula chamada | Taspas palavrasOuNumeros Taspas | ;
+fechaChaves: TfechaChaves;
 
-ifTern: TifTern TabreParenteses Tvar Tvirgula Tvar Tvirgula Tvar TpontoVirgula;
 
-inArray: TinArray TabreParenteses Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula ;
 
-indexOf: Tponto TindexOf TabreParenteses Taspas palavrasOuNumeros Taspas TpontoVirgula;
 
-isNullEmptyUndefined: TisNullEmptyUndefined TabreParenteses Tvar TfechaParenteses TpontoVirgula ;
 
-tryCatch: Ttry TabreChaves console TfechaChaves Tcatch tabreChaves console TfechaChaves ;
+
+
+
 
 promise: Tnew Tpromise TabreParenteses Tresolve Tvirgula Treject TfechaParenteses;
 
-convertePontoVirgula: TconvertePontoVirgula TabreParenteses Tvar TfechaParenteses TpontoVirgula;
 
 forEach: Tvar Tponto TforEach TabreParenteses Tvar TmaiorIgual corpoForEach TfechaParenteses TpontoVirgula;
 
@@ -141,9 +165,9 @@ declaraVariavel: tiposDeVariavel tVar inicializaVarivel TpontoVirgula | tiposDeV
 
 inicializaVarivel: Tigual stringOuNumero;
 
-stringOuNumero: Taspas Tvar Taspas | Tvalor;
+stringOuNumero: Tstring | Tvalor;
 
-switch: Tswitch tabreParenteses tVar tfechaParenteses TabreChaves corpoSwitch;
+switch: Tswitch tabreParenteses tVar tfechaParenteses TabreChaves corpoSwitch Tdefault TdoisPontos TcorpoCase TpontoVirgula;
 
 corpoSwitch:  Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula corpoSwitch | Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula;
 
@@ -180,7 +204,6 @@ corpoGeral:
    | continuacaoCodigo;  
 
 continuacaoCodigo: 
-
 
 
 %%

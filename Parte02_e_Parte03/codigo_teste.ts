@@ -1,42 +1,43 @@
-addLibs{BibliotecaX} from '../libs/BibliotecaX';
-addLibs{BibliotecaY} from '../libs/BibliotecaY';
-addLibs{BibliotecaZ} from '../libs/BibliotecaZ';
+addLibs{BibliotecaX} from "../libs/BibliotecaX";
+addLibs{BibliotecaY} from "../libs/BibliotecaY";
+addLibs{BibliotecaZ} from "../libs/BibliotecaZ";
 
 $using biblioteca.math;
 
-class CodigoTest { //Componente principal
+class CodigoTest {
     var result;
-    var idadeY = 5;
+    var result;
     var idadeX = 10;
     var q,w,r;
     $const tam = 15;
+    var cafe = "cafe";
     
-    var.replace();
+    cafe.replace("cafe","suco");
     convertePontoVirgula(n);
 
     try {
         p();
-        InArray(lista, item)
-        ifTern(result, idadeY, idadeX)
-    } catch(err) {
-        console.log(err);
+        inArray(lista, item);
+        ifTern(result, idadeY, idadeX);
+    } catch {
+        console.log("erro");
     }
 
     const p = async() => {
        await promessa;
     }
     
-    idadeY.indexOf('.');
+    idadeY.indexOf(".");
     
-    isNullUndefinedEmpty(a:any);
+    isNullEmptyUndefined(a);
 
     funcao1 (a, b?) { 
         switch(a){
-            case 1: console.log('OK'); break;
-            case 2: console.log('OK'); break;
-            case 3: console.log('OK'); break;
-            case 4: console.log('OK'); break;
-            default: console.log('Nao OK');
+            case 1: console.log("OK"); break;
+            case 2: console.log("OK"); break;
+            case 3: console.log("OK"); break;
+            case 4: console.log("OK"); break;
+            default: console.log("Nao OK");
         }
     };
 
@@ -46,16 +47,16 @@ class CodigoTest { //Componente principal
 
             resolve();
         }).then(()=>{
-            throw new Error('caso algo falhe');
+            throw new Error("caso algo falhe");
         }).catch(()=> {
-            console.log('se tem falha faca isso')
+            console.log("se tem falha faca isso")
         })
     }
     
     funcao2 (a, b) { 
         q = w + r;
         for(var i = 0; i < q; i++){
-            console.log('Numero: ' + i);
+            console.log("Numero: " + i);
         }
     };
 

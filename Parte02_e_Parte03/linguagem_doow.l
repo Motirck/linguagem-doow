@@ -1,7 +1,7 @@
 %{
 	#include "y.tab.h"
 %}
-var [A-Za-z]+[A-Za-z0-9.]*
+var [A-Za-z]+[A-Za-z0-9./]*
 valor [0-9]+
 
 %%
@@ -50,10 +50,12 @@ valor [0-9]+
 "}"						{ return TfechaChaves; }
 "["						{ return TabreColchete; }
 "]"						{ return TfechaColchete; }
-"true"  				{ return tTrue; }
-"false" 				{ return tFalse; }
-"import" 				{ return tImport; }
+"true"  				{ return Ttrue; }
+"false" 				{ return Tfalse; }
+"class" 				{ return Tclass; }
+"import" 				{ return Timport; }
 "="						{ return Tigual; }
+"=="					{ return TigualDuplo; }
 "==="					{ return TigualTriplo; }
 ","						{ return Tvirgula; }
 "%"						{ return Tporcentagem; }
@@ -66,7 +68,6 @@ valor [0-9]+
 "/"						{ return Tdivisao; }
 "from"  				{ return Tfrom; }
 "\""					{ return Taspas; }
-"." 					{ return Tponto; }
 "throw" 				{ return Tthrow; }
 "new"   				{ return Tnew; }
 "Error" 				{ return Terror; }
@@ -83,6 +84,7 @@ valor [0-9]+
 {var} 					{ return Tvar; }
 {valor} 				{ return Tvalor; }
 ["][^"]*["]				{ return Tstring; }
+[.]						{ return Tponto; }
 [ \n\t] 
 
 %%
