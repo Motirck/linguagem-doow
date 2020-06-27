@@ -6,7 +6,7 @@ $using biblioteca.math;
 
 class CodigoTest {
     var result;
-    var result;
+    var caju;
     var idadeX = 10;
     var q,w,r;
     $const tam = 15;
