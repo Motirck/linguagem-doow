@@ -36,6 +36,7 @@ valor [0-9]+
 "const" 				{ return Tconst; }
 "while" 				{ return Twhile; }
 "continue" 				{ return Tcontinue; }
+"promessa" 				{ return Tpromessa; }
 "switch" 				{ return Tswitch; }
 "else" 					{ return Telse; }
 "let" 					{ return Tlet; }

@@ -80,6 +80,7 @@
 %token THashtagComentario
 %token TSifrao
 %token Tvar
+%token Tpromessa
 %token Tclass
 %token Tvalor
 %start inicio
@@ -110,6 +111,8 @@ chamadaFuncao: convertePontoVirgula chamadaFuncao |
                tryCatch chamadaFuncao             |
                condicao chamadaFuncao             |
                qualquerFuncao chamadaFuncao       |
+               funcaoUm chamadaFuncao             |
+               exemploPromise chamadaFuncao       |
                fechaChaves;
 convertePontoVirgula: TconvertePontoVirgula TabreParenteses Tvar TfechaParenteses TpontoVirgula;
 isNullEmptyUndefined: TisNullEmptyUndefined TabreParenteses Tvar TfechaParenteses TpontoVirgula ;
@@ -117,94 +120,28 @@ tryCatch: Ttry TabreChaves console Tcatch TabreChaves console | Ttry TabreChaves
           Ttry TabreChaves console Tcatch TabreChaves chamadaFuncao | Ttry TabreChaves chamadaFuncao Tcatch TabreChaves console;
 ifTern: TifTern TabreParenteses Tvar Tvirgula Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula;
 inArray: TinArray TabreParenteses Tvar Tvirgula Tvar TfechaParenteses TpontoVirgula ;
-indexOf: Tvar TindexOf TabreParenteses Tstring TfechaParenteses TpontoVirgula;
-condicao: Tif TabreParenteses Tvar TigualDuplo palavrasOuNumeros TfechaParenteses TabreChaves Treturn Ttrue TpontoVirgula TfechaChaves Telse TabreChaves Treturn Tfalse TpontoVirgula TfechaChaves;
+indexOf: Tvar TabreParenteses Tstring TfechaParenteses TpontoVirgula;
+condicao: Tif TabreParenteses Tvar TigualDuplo palavrasOuNumeros TComparacaoOU Tvar Tmaior Tvar TfechaParenteses Treturn Ttrue TpontoVirgula Telse Treturn Tfalse TpontoVirgula;
 
-
-console: Tlog log;
+console: Tlog log console | Tlog log;
 log: TabreParenteses chamada TfechaParenteses TpontoVirgula;
 chamada:  Tstring Tvirgula chamada | Tstring;
 qualquerFuncao: Tvar TabreParenteses TfechaParenteses TpontoVirgula;
+fechaChaves: TfechaChaves | TfechaChaves fazerAsync;
 
-fechaChaves: TfechaChaves;
+fazerAsync: Tconst Tvar Tigual Tasync TabreParenteses TfechaParenteses TmaiorIgual TabreChaves Tawait Tpromessa TpontoVirgula TfechaChaves funcaoUm;
+funcaoUm: Tvar TabreParenteses Tvar Tvirgula Tvar TInterrogacao TfechaParenteses TabreChaves switch TfechaChaves exemploPromise funcaoDois;
+switch: Tswitch TabreParenteses Tvar TfechaParenteses TabreChaves corpoSwitch Tdefault TdoisPontos console TfechaChaves;
+corpoSwitch:  Tcase palavrasOuNumeros TdoisPontos console Tbreak TpontoVirgula corpoSwitch | Tcase palavrasOuNumeros TdoisPontos console Tbreak TpontoVirgula;
 
+exemploPromise:  Tvar TabreParenteses TfechaParenteses TabreChaves promise console Tresolve TabreParenteses TfechaParenteses TpontoVirgula TfechaChaves TfechaParenteses
+                 Tponto Tthen TabreParenteses TabreParenteses TfechaParenteses TmaiorIgual TabreChaves Tthrow Tnew Terror TabreParenteses Tstring TfechaParenteses TpontoVirgula TfechaChaves TfechaParenteses
+                 Tponto Tcatch TabreParenteses TabreParenteses TfechaParenteses TmaiorIgual TabreChaves console TfechaChaves TfechaParenteses TfechaChaves;
 
-
-
-
-
-
-
-
-promise: Tnew Tpromise TabreParenteses Tresolve Tvirgula Treject TfechaParenteses;
-
-
-forEach: Tvar Tponto TforEach TabreParenteses Tvar TmaiorIgual corpoForEach TfechaParenteses TpontoVirgula;
-
-corpoForEach: corpoGeral;
-
-map: Tvar Tponto Tmap TabreParenteses Tfunction TabreParenteses Tvar TfechaParenteses TabreChaves corpoMap TfechaChaves TfechaParenteses TpontoVirgula;
-
-corpoMap: corpoGeral;
-
-length: Tponto Tlength ;
-
-reduce: Tponto Treduce TabreParenteses Tvar tfechaParenteses TpontoVirgula;
-
-enum: Tenum Tvar TabreChaves corpoEnum;
-
-corpoEnum: Tvar Tvirgula corpoEnum | Tvar Tvirgula TfechaChaves;
-
-return: Treturn corpoCodigo;
-
-corpoCodigo: corpoGeral;
-
-tiposDeVariavel: var | const;
-
-declaraVariavel: tiposDeVariavel tVar inicializaVarivel TpontoVirgula | tiposDeVariavel tvar TpontoVirgula;
-
-inicializaVarivel: Tigual stringOuNumero;
-
-stringOuNumero: Tstring | Tvalor;
-
-switch: Tswitch tabreParenteses tVar tfechaParenteses TabreChaves corpoSwitch Tdefault TdoisPontos TcorpoCase TpontoVirgula;
-
-corpoSwitch:  Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula corpoSwitch | Tcase Tvar TdoisPontos corpoCase Tbreak TpontoVirgula;
-
-corpoCase: corpoGeral;
-
-condicoes: TmaiorIgual | Tmaior | Tmenor | Tmenor Tigual;
-
-while: Twhile tabreParenteses palavrasOuNumeros condicoes palavrasOuNumeros TfechaParenteses TabreChaves corpowhile TfechaChaves;
-
-corpoWhile: corpoGeral;
-
-TiposDeFuncao: void | int | char;
-
-corpoGeral: 
-   console
-   | chamada
-   | ifTern
-   | inArray
-   | indexOf
-   | isNullEmptyUndefined
-   | tryCatch
-   | promise
-   | convertePontoVirgula
-   | forEach
-   | map
-   | length
-   | reduce
-   | enum
-   | declaraVariavel
-   | inicializaVarivel
-   | switch
-   | condicoes
-   | while corpoGeral
-   | continuacaoCodigo;  
-
-continuacaoCodigo: 
-
+promise: Tnew Tpromise TabreParenteses TabreParenteses Tresolve Tvirgula Treject TfechaParenteses TmaiorIgual TabreChaves;
+funcaoDois: Tvar TabreParenteses Tvar Tvirgula Tvar TfechaParenteses TabreChaves Tvar Tigual Tvar Tmais Tvar TpontoVirgula
+            Tfor TabreParenteses Tvariavel Tvar Tigual palavrasOuNumeros TpontoVirgula Tvar Tmenor Tvar TpontoVirgula Tvar Tmais Tmais TfechaParenteses TabreChaves
+            console TfechaChaves TfechaChaves TfechaChaves;
 
 %%
 
