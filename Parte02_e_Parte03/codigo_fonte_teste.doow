@@ -1,0 +1,92 @@
+addLibs{BibliotecaX} from "../libs/BibliotecaX";
+addLibs{BibliotecaY} from "../libs/BibliotecaY";
+addLibs{BibliotecaZ} from "../libs/BibliotecaZ";
+
+$using biblioteca.math;
+
+class CodigoTest {
+    var result;
+    var caju;
+    var idadeX = 10;
+    var q,w,r;
+    $const tam = 15;
+    var cafe = "cafe";
+    
+    cafe.replace("cafe","suco");
+
+    convertePontoVirgula(n);
+
+    isNullEmptyUndefined(a);
+
+    inArray(lista, item);
+
+    ifTern(result, idadeY, idadeX);
+
+    idadeY.indexOf("caju");
+
+    exemploPromisse() {
+        new Promise((resolve, reject) => {
+            console.log("inicio");
+
+            resolve();
+        }).then(()=>{
+            throw new Error("caso algo falhe");
+        }).catch(()=> {
+            console.log("se tem falha faca isso");
+        })
+    }
+
+    try {
+        p();
+
+        idadeY.indexOf("caju");
+
+        inArray(lista, item);
+
+        ifTern(result, idadeY, idadeX);
+
+        convertePontoVirgula(n);
+
+        isNullEmptyUndefined(a);
+
+        if(a.length == 2 || idadeX > idadeY)
+            return true;
+        else
+            return false;
+    } catch {
+        console.log("erro");
+    }
+
+    const p = async() => {
+       await promessa;
+    }
+
+    funcao1 (a, b?) { 
+        switch(a){
+            case 1: console.log("OK"); break;
+            case 2: console.log("OK"); break;
+            case 3: console.log("OK"); break;
+            case 4: console.log("OK"); break;
+            default: console.log("Nao OK");
+        }
+    }
+
+    exemploPromisse() {
+        new Promise((resolve, reject) => {
+            console.log("inicio");
+
+            resolve();
+        }).then(()=>{
+            throw new Error("caso algo falhe");
+        }).catch(()=> {
+            console.log("se tem falha faca isso");
+        })
+    }
+    
+    funcao2 (a, b) { 
+        q = w + r;
+        for(var i = 0; i < q; i++){
+            console.log("Numero");
+        }
+    }
+}
